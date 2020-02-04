@@ -56,8 +56,13 @@ public class ItemCreator {
     /**
      * components for the weapon panel
      */
+    public JLabel weapon_Type_Label = new JLabel("Weapon Type");
+    public JLabel damage_Type_Label = new JLabel("Damage Type");
+    public JLabel damage_Die_Label = new JLabel("Damage Die");
+    public JLabel versatility_Damage_Label = new JLabel("Versatile Damage");
     public JLabel range_Normal_Label = new JLabel("Normal Range");
     public JLabel range_Maximum_Label = new JLabel("Maximum Range");
+    public JLabel properties_Label = new JLabel("Properties");
     public JCheckBox ammunition_CheckBox = new JCheckBox("Ammunition");
     public JCheckBox finesse_CheckBox = new JCheckBox("Finesse");
     public JCheckBox heavy_CheckBox = new JCheckBox("Heavy");
@@ -100,14 +105,25 @@ public class ItemCreator {
      * @param y grid y value for the GridBagConstraints
      */
     public void add_Component_GBC(JPanel jpanel, Component component, 
-            GridBagConstraints gbc, int x, int y){
+            GridBagConstraints gbc, int x, int y, int width){
         gbc.gridx = x;
         gbc.gridy = y;
+        gbc.gridwidth = width;
         jpanel.add(component, gbc);
     }
     
-    public void construct_Main_Panel(){
-        
+    public void fill_Combo_Boxes(){
+        String item_Types[] = {"Armor", "Weapon", "Gear", "Pack", "Tool"};
+        String armor_Types[] = {"Light", "Medium", "Heavy", "Shield"};
+        String weapon_Types [] = {"Simple Melee", "Simple Ranged", "Martial Melee", "Martial Ranged"};
+        String damage_Dice[] = {"1d4", "1d6", "1d8", "1d10", "1d12", "2d6"};
+        String damage_Types[] = {"Bludgeoning", "Piercing", "Slashing"};
+        item_Type_ComboBox = new JComboBox(item_Types);
+        armor_Type_ComboBox = new JComboBox(armor_Types);
+        weapon_Type_ComboBox = new JComboBox(weapon_Types);
+        damage_Die_ComboBox = new JComboBox(damage_Dice);
+        versatile_secondary_Damage_Die_ComboBox = new JComboBox(damage_Dice);
+        damage_Type_ComboBox = new JComboBox(damage_Types);        
     }
     
     public JPanel ItemCreator(){
@@ -123,6 +139,8 @@ public class ItemCreator {
         pack_Panel.setBackground(murky);
         item_Creator_Panel.setBackground(sandstone);
         
+        fill_Combo_Boxes();
+        
          /**
          * Set the GridBagLayout constraints for the start panel
          */
@@ -130,7 +148,60 @@ public class ItemCreator {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
         
+        /**
+         * add components to the main panel
+         */
+        add_Component_GBC(main_Panel, panel_Title, gbc, 0, 0, 3);
+        add_Component_GBC(main_Panel, save_Item, gbc, 0, 3, 1);
+        add_Component_GBC(main_Panel, item_Name_Label, gbc, 1, 0, 1);
+        add_Component_GBC(main_Panel, item_Name_Field, gbc, 1, 1, 3);
+        add_Component_GBC(main_Panel, item_Type_Label, gbc, 2, 0, 1);
+        add_Component_GBC(main_Panel, item_Type_ComboBox, gbc, 2, 1, 1);
+        add_Component_GBC(main_Panel, item_ID_Label, gbc, 2, 2, 1);
+        add_Component_GBC(main_Panel, item_ID_Number, gbc, 2, 3, 1);
+        add_Component_GBC(main_Panel, item_Cost, gbc, 3, 0, 1);
+        add_Component_GBC(main_Panel, item_Cost_Field, gbc, 3, 1, 1);
+        add_Component_GBC(main_Panel, item_Weight, gbc, 3, 2, 1);
+        add_Component_GBC(main_Panel, item_Weight_Field, gbc, 3, 3, 1);
         
+        /**
+         * add components to the armor panel
+         */
+        add_Component_GBC(armor_Panel, armor_Type_Label, gbc, 0, 0, 1);
+        add_Component_GBC(armor_Panel, armor_Type_ComboBox, gbc, 0, 1, 1);
+        add_Component_GBC(armor_Panel, base_AC_Label, gbc, 0, 2, 1);
+        add_Component_GBC(armor_Panel, base_AC_Field, gbc, 0, 3, 1);
+        add_Component_GBC(armor_Panel, stealth_Disad_CheckBox, gbc, 1, 0, 2);
+        add_Component_GBC(armor_Panel, min_Str_Label, gbc, 1, 2, 1);
+        add_Component_GBC(armor_Panel, min_Str_Field, gbc, 1, 3, 1);
+        
+        /**
+         * add components to the weapon panel
+         */
+        add_Component_GBC(weapon_Panel, weapon_Type_Label, gbc, 0, 0, 1);
+        add_Component_GBC(weapon_Panel, weapon_Type_ComboBox, gbc, 0, 1, 1);
+        add_Component_GBC(weapon_Panel, damage_Type_Label, gbc, 0, 2, 1);
+        add_Component_GBC(weapon_Panel, damage_Type_ComboBox, gbc, 0, 3, 1);
+        add_Component_GBC(weapon_Panel, damage_Die_Label, gbc, 1, 0, 1);
+        add_Component_GBC(weapon_Panel, damage_Die_ComboBox, gbc, 1, 1, 1);
+        add_Component_GBC(weapon_Panel, versatility_Damage_Label, gbc, 1, 2, 1);
+        add_Component_GBC(weapon_Panel, versatile_secondary_Damage_Die_ComboBox,gbc, 1, 3, 1);
+        add_Component_GBC(weapon_Panel, range_Normal_Label, gbc, 2, 0, 1);
+        add_Component_GBC(weapon_Panel, range_Normal_Field, gbc, 2, 1, 1);
+        add_Component_GBC(weapon_Panel, range_Maximum_Label, gbc, 2, 2, 1);
+        add_Component_GBC(weapon_Panel, range_Maximum_Field, gbc, 2, 3, 1);
+        add_Component_GBC(weapon_Panel, properties_Label, gbc, 3, 0, 1);
+        add_Component_GBC(weapon_Panel, ammunition_CheckBox, gbc, 4, 0, 1);
+        add_Component_GBC(weapon_Panel, finesse_CheckBox, gbc, 4, 1, 1);
+        add_Component_GBC(weapon_Panel, heavy_CheckBox, gbc, 4, 2, 1);
+        add_Component_GBC(weapon_Panel, light_CheckBox, gbc, 4, 3, 1);
+        add_Component_GBC(weapon_Panel, loading_CheckBox, gbc, 5, 0, 1);
+        add_Component_GBC(weapon_Panel, reach_CheckBox, gbc, 5, 1, 1);
+        add_Component_GBC(weapon_Panel, thrown_CheckBox, gbc, 5, 2, 1);
+        add_Component_GBC(weapon_Panel, versatile_CheckBox, gbc, 5, 3, 1);
+        add_Component_GBC(weapon_Panel, two_Handed_CheckBox, gbc, 6, 0, 1);
+        
+        return item_Creator_Panel;
     }
     
     

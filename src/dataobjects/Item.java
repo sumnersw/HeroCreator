@@ -17,6 +17,20 @@ enum item_Type {
     Tool
 }
 
+enum armor_Type{
+    Light,
+    Medium,
+    Heavy,
+    Shield
+}
+
+enum weapon_Type{
+    simple_Melee_Weapon,
+    simple_Ranged_Weapon,
+    martial_Melee_Weapon,
+    martial_Ranged_Weapon
+}
+
 public class Item {
          
     private int item_Id;
