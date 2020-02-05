@@ -13,7 +13,7 @@ import javax.swing.*;
  *
  * @author stephen
  */
-public class ItemCreator {
+public class ItemCreator{
     
     public JPanel item_Creator_Panel = new JPanel();
     public JPanel main_Panel = new JPanel();
@@ -84,8 +84,11 @@ public class ItemCreator {
      */
     public JLabel pack_Contents_Label = new JLabel("Pack Contents");
     public JLabel item_Quantity_Label = new JLabel("Quantity");
+    public JLabel add_Item_Label = new JLabel("Add Item");
     public JComboBox add_Item_ComboBox;
     public JTextField item_Quantity_Field = new JTextField();
+    public JLabel pack_Contents_Listed = new JLabel();
+    public JButton add_Item_To_Pack_Button = new JButton("Add Item to Pack");
     
     
     /**
@@ -133,10 +136,13 @@ public class ItemCreator {
         armor_Panel.setLayout(new GridBagLayout());
         weapon_Panel.setLayout(new GridBagLayout());
         pack_Panel.setLayout(new GridBagLayout());
+        gear_Panel.setLayout(new CardLayout());
+        tool_Panel.setBackground(murky);
         main_Panel.setBackground(murky);
         armor_Panel.setBackground(murky);
         weapon_Panel.setBackground(murky);
         pack_Panel.setBackground(murky);
+        gear_Panel.setBackground(murky);
         item_Creator_Panel.setBackground(sandstone);
         
         fill_Combo_Boxes();
@@ -200,6 +206,41 @@ public class ItemCreator {
         add_Component_GBC(weapon_Panel, thrown_CheckBox, gbc, 5, 2, 1);
         add_Component_GBC(weapon_Panel, versatile_CheckBox, gbc, 5, 3, 1);
         add_Component_GBC(weapon_Panel, two_Handed_CheckBox, gbc, 6, 0, 1);
+        
+        /**
+         * add components to the pack panel
+         */
+        add_Component_GBC(pack_Panel, pack_Contents_Label, gbc, 0, 0, 2);
+        add_Component_GBC(pack_Panel, add_Item_To_Pack_Button, gbc, 0, 1, 2);
+        add_Component_GBC(pack_Panel, pack_Contents_Listed, gbc, 1, 0, 4);
+        add_Component_GBC(pack_Panel, add_Item_Label, gbc, 2, 0, 1);
+        add_Component_GBC(pack_Panel, add_Item_ComboBox, gbc, 2, 1, 1);
+        add_Component_GBC(pack_Panel, item_Quantity_Label, gbc, 2, 2, 1);
+        add_Component_GBC(pack_Panel, item_Quantity_Field, gbc, 2, 3, 1);
+        
+        /**
+         * add components to the gear panel in card layout
+         */
+        gear_Panel.add(armor_Panel);
+        gear_Panel.add(weapon_Panel);
+        gear_Panel.add(pack_Panel);
+        gear_Panel.add(tool_Panel);
+        
+        /**
+         * add components to the creator panel
+         */
+        add_Component_GBC(item_Creator_Panel, main_Panel, gbc, 0, 0, 1);
+        add_Component_GBC(item_Creator_Panel, gear_Panel, gbc, 1, 0, 1);
+        
+        /**
+         * set default visibility
+         */
+        main_Panel.setVisible(true);
+        gear_Panel.setVisible(true);
+        armor_Panel.setVisible(false);
+        weapon_Panel.setVisible(true);
+        pack_Panel.setVisible(false);
+        tool_Panel.setVisible(false);        
         
         return item_Creator_Panel;
     }
